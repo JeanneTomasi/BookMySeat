@@ -1,6 +1,7 @@
 package com.inti.formation.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +33,8 @@ public class User implements Serializable{
 	private int id_user;
 	private String name;
 	private String firstName;
+	@Temporal(value=TemporalType.DATE)
+	private Date dateDeNaissance;
 	@Embedded
 	private Adress adress;
 	private String email;
