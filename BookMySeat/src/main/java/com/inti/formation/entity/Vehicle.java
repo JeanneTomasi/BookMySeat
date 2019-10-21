@@ -1,6 +1,7 @@
 package com.inti.formation.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,5 +36,7 @@ public class Vehicle implements Serializable {
 	private double fullRate;
 	@OneToMany(mappedBy = "vehicle")
 	private Seat seat;
+	@OneToMany(mappedBy = "id_vehicles")
+	private List<TablePorteuseStation_Line_Vehicle> arrets;
 	
 }
