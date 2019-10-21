@@ -8,6 +8,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,5 +36,7 @@ public class User implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private Handicap handicap;
 	private String username;
+	@OneToOne(mappedBy = "user")
+	private Seat seat;
 
 }
