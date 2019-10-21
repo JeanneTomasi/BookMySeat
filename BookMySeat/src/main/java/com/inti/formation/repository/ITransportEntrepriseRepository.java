@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.inti.formation.entity.TransportEntreprise;
 @Repository
-public interface ITrasportEntrepriseRepository extends JpaRepository<TransportEntreprise, Integer>{
+public interface ITransportEntrepriseRepository extends JpaRepository<TransportEntreprise, Integer>{
 
 }
