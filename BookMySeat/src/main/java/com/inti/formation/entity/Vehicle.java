@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -31,5 +33,7 @@ public class Vehicle implements Serializable {
 	private int placesNumber;
 	private int placesLeft;
 	private double fullRate;
+	@OneToMany(mappedBy = "vehicle")
+	private Seat seat;
 	
 }

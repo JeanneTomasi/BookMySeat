@@ -5,6 +5,9 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -30,5 +33,11 @@ public class Seat implements Serializable {
 	private String placement;
 	private boolean reservable;
 	private boolean isReserved;
+	@OneToOne
+	@JoinColumn(name = "id_user")
+	private User user;
+	@ManyToOne
+	@JoinColumn(name = "id_vehicle")
+	private Vehicle vehicle;
 	
 }

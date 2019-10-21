@@ -3,20 +3,20 @@ package com.inti.formation.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.inti.formation.entity.Seat;
 import com.inti.formation.iservice.ISeatService;
-import com.inti.formation.iservice.IVehicleService;
 import com.inti.formation.repository.ISeatRepository;
 
+@Service
 public class SeatService implements ISeatService {
 	
 	@Autowired
 	private ISeatRepository repo;
 
-
 	@Override
-	public Seat ajouter(Seat s) {
+	public Seat add(Seat s) {
 		return repo.save(s);
 	}
 

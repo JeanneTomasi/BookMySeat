@@ -10,35 +10,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.inti.formation.entity.Vehicle;
-import com.inti.formation.iservice.IVehicleService;
+import com.inti.formation.entity.Line;
+import com.inti.formation.iservice.ILineService;
 
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/apiVehicle")
-public class VehicleController {
+@RequestMapping("/apiLine")
+public class LineController {
 	
     @Autowired
-    private IVehicleService metier;
+    private ILineService metier;
     
     @RequestMapping(value="/ajouter", method=RequestMethod.POST)
-    public Vehicle ajouter(@RequestBody Vehicle s) {
+    public Line ajouter(@RequestBody Line s) {
     	return metier.add(s);
     }
     
     @RequestMapping(value="/update", method=RequestMethod.PUT)
-    public Vehicle update(@RequestBody Vehicle s) {
+    public Line update(@RequestBody Line s) {
     	return metier.update(s);
     }
     
     @RequestMapping(value="/get/{id}", method=RequestMethod.GET)
-    public Vehicle getById(@PathVariable int id) {
+    public Line getById(@PathVariable int id) {
     	return metier.getById(id);
     }
     
-    @RequestMapping(value="/vehicles", method=RequestMethod.GET)
-    public List<Vehicle> findAll() {
+    @RequestMapping(value="/Lines", method=RequestMethod.GET)
+    public List<Line> findAll() {
     	return metier.findAll();
     }
     

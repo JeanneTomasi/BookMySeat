@@ -6,7 +6,7 @@ import com.inti.formation.entity.Vehicle;
 
 public interface IVehicleService {
 	
-	public Vehicle ajouter(Vehicle v);
+	public Vehicle add(Vehicle v);
 	public Vehicle update(Vehicle v);
 	public void delete(int id);
 	public Vehicle getById(int id);

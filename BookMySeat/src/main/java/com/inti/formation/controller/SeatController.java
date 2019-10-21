@@ -24,7 +24,7 @@ public class SeatController {
     
     @RequestMapping(value="/ajouter", method=RequestMethod.POST)
     public Seat ajouter(@RequestBody Seat s) {
-    	return metier.ajouter(s);
+    	return metier.add(s);
     }
     
     @RequestMapping(value="/update", method=RequestMethod.PUT)

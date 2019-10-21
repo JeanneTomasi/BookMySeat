@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Station implements Serializable {
+public class Line implements Serializable {
 
 	/**
 	 * 
@@ -26,7 +26,7 @@ public class Station implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private int id_station;
+	private int id_line;
 	private String name;
 	private String localisation;
 	
