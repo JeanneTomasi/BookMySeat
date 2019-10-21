@@ -1,10 +1,12 @@
 package com.inti.formation.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -29,5 +31,7 @@ public class Line implements Serializable {
 	private int id_line;
 	private String name;
 	private String localisation;
+	@OneToMany(mappedBy = "id_line")
+	private List<TablePorteuseStation_Line_Vehicle> arrets;
 	
 }
