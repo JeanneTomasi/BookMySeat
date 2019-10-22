@@ -37,7 +37,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
-	public List<User> findall(){
+	public List<User> findAll(){
 		return metier.findAll();
 	}
 	
