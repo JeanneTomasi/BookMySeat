@@ -4,7 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,27 +26,27 @@ public class LineController {
     @Autowired
     private ILineService metier;
     
-    @RequestMapping(value="/ajouter", method=RequestMethod.POST)
+    @PostMapping(value="/add")
     public Line ajouter(@RequestBody Line l) {
     	return metier.add(l);
     }
     
-    @RequestMapping(value="/update", method=RequestMethod.PUT)
+    @PutMapping(value="/update")
     public Line update(@RequestBody Line l) {
     	return metier.update(l);
     }
     
-    @RequestMapping(value="/get/{id}", method=RequestMethod.GET)
+    @GetMapping(value="/get/{id}")
     public Line getById(@PathVariable int id) {
     	return metier.getById(id);
     }
     
-    @RequestMapping(value="/Lines", method=RequestMethod.GET)
+    @GetMapping(value="/Lines")
     public List<Line> findAll() {
     	return metier.findAll();
     }
     
-    @RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
+    @DeleteMapping(value="/delete/{id}")
     public void delete(@PathVariable int id) {
     	metier.delete(id);
     }

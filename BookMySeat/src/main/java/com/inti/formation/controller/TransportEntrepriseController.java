@@ -3,7 +3,11 @@ package com.inti.formation.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,27 +23,27 @@ public class TransportEntrepriseController {
 	
 	private ITransportEntrepriseService metier;
 	
-	@RequestMapping(value="/ajouter", method=RequestMethod.POST)
+	@PostMapping(value="/add")
     public TransportEntreprise ajouter(@RequestBody TransportEntreprise tre) {
     	return metier.add(tre);
     }
     
-    @RequestMapping(value="/update", method=RequestMethod.PUT)
+    @PutMapping(value="/update")
     public TransportEntreprise update(@RequestBody TransportEntreprise tre) {
     	return metier.update(tre);
     }
     
-    @RequestMapping(value="/get/{id}", method=RequestMethod.GET)
+    @GetMapping(value="/get/{id}")
     public TransportEntreprise getById(@PathVariable int id) {
     	return metier.getById(id);
     }
     
-    @RequestMapping(value="/transportEntreprises", method=RequestMethod.GET)
+    @GetMapping(value="/transportEntreprises")
     public List<TransportEntreprise> findAll() {
     	return metier.findAll();
     }
     
-    @RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
+    @DeleteMapping(value="/delete/{id}")
     public void delete(@PathVariable int id) {
     	metier.delete(id);
     }
