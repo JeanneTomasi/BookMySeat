@@ -114,7 +114,7 @@ public class UserControllerTest {
 	public void createEntity() {
 		LOGGER.info("------------------ Testing createEntity Method ------------------");
 		LOGGER.info("------------------ Constructing User ------------------");
-		User user = User.builder().firstName("José").adress(adress).build();
+		User user = User.builder().id_user(1).firstName("José").adress(adress).build();
 		int userId = user.getId_user();
 		userService.add(user);
 		MvcResult mvcResult;
@@ -163,7 +163,7 @@ public class UserControllerTest {
 		try {
 			LOGGER.info("------------------ Testing testUpdateUserStatus Method ------------------");
 			LOGGER.info("------------------ Constructing User ------------------");
-			User oldUser = userService.add(User.builder().firstName("José").adress(adress).build());
+			User oldUser = userService.add(User.builder().id_user(1).firstName("José").adress(adress).build());
 			LOGGER.info("------------------ Saving User ------------------");
 			userService.add(oldUser);
 			LOGGER.info("------------------ Modifying User ------------------");
@@ -193,7 +193,7 @@ public class UserControllerTest {
 		try {
 			LOGGER.info("------------------ Testing updateUser Method ------------------");
 			LOGGER.info("------------------ Constructing User ------------------");
-			User oldUser = userService.add(User.builder().firstName("José").adress(adress).build());
+			User oldUser = userService.add(User.builder().id_user(1).firstName("José").adress(adress).build());
 			LOGGER.info("------------------ Saving User ------------------");
 			userService.add(oldUser);
 			LOGGER.info("------------------ Modifying User ------------------");
@@ -223,7 +223,7 @@ public class UserControllerTest {
 	public void testUpdateUser() {
 		LOGGER.info("------------------ Testing testUpdateUser Method ------------------");
 		LOGGER.info("------------------ Constructing User ------------------");
-		User oldUser = User.builder().firstName("José").adress(adress).build();
+		User oldUser = User.builder().id_user(1).firstName("José").adress(adress).build();
 		LOGGER.info("------------------ Saving User ------------------");
 		userService.add(oldUser);
 		LOGGER.info("------------------ Modifying User ------------------");
@@ -251,7 +251,7 @@ public class UserControllerTest {
 		try {
 			LOGGER.info("------------------ Constructing User ------------------");
 			LOGGER.info("------------------ Saving User ------------------");
-			User user = User.builder().firstName("José").adress(adress).build();
+			User user = User.builder().id_user(1).firstName("José").adress(adress).build();
 			int userId = user.getId_user();
 			userService.add(user);
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
@@ -274,7 +274,7 @@ public class UserControllerTest {
 		try {
 			LOGGER.info("------------------ Constructing User ------------------");
 			LOGGER.info("------------------ Saving User ------------------");
-			User user = userService.add(User.builder().firstName("José").adress(adress).build());
+			User user = userService.add(User.builder().id_user(1).firstName("José").adress(adress).build());
 			int userId = user.getId_user();
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
 			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri + "/get/" + userId)).andReturn();
@@ -295,7 +295,7 @@ public class UserControllerTest {
 	public void getDeleteUser() {
 		LOGGER.info("------------------ Testing getDeleteUser Method ------------------");
 		LOGGER.info("------------------ Constructing User ------------------");
-		User user = User.builder().firstName("José").adress(adress).build();
+		User user = User.builder().id_user(1).firstName("José").adress(adress).build();
 		int userId = user.getId_user();
 		userService.add(user);
 		LOGGER.info("------------------ Saving User ------------------");
@@ -324,7 +324,7 @@ public class UserControllerTest {
 			LOGGER.info("------------------ Testing findAllStatus Method ------------------");
 			LOGGER.info("------------------ Constructing User ------------------");
 			LOGGER.info("------------------ Saving User ------------------");
-			userService.add(User.builder().firstName("José").adress(adress).build());
+			userService.add(User.builder().id_user(1).firstName("José").adress(adress).build());
 			LOGGER.info("------------------ Mocking Context Webservice ------------------");
 			mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri + "/users").accept(MediaType.APPLICATION_JSON_VALUE))
 					.andReturn();
@@ -346,7 +346,7 @@ public class UserControllerTest {
 			LOGGER.info("------------------ Testing findAllUserList Method ------------------");
 			LOGGER.info("------------------ Constructing User ------------------");
 			LOGGER.info("------------------ Saving User ------------------");
-			userService.add(User.builder().firstName("José").adress(adress).build());
+			userService.add(User.builder().id_user(1).firstName("José").adress(adress).build());
 			LOGGER.info("------------------ Mocking Context Webservice ------------------");
 			mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri + "/users").accept(MediaType.APPLICATION_JSON_VALUE))
 					.andReturn();
@@ -387,10 +387,9 @@ public class UserControllerTest {
 		try {
 			LOGGER.info("------------------ Constructing User ------------------");
 			LOGGER.info("------------------ Saving User ------------------");
-			User user = User.builder().firstName("José").adress(adress).build();
+			User user = User.builder().id_user(1).firstName("José").adress(adress).build();
 			int userId = user.getId_user();
 			userService.add(user);
-
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
 			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri + "/delete/" + userId)).andReturn();
 			LOGGER.info("------------------ Getting HTTP Status ------------------");
@@ -411,7 +410,7 @@ public class UserControllerTest {
 		try {
 			LOGGER.info("------------------ Constructing User ------------------");
 			LOGGER.info("------------------ Saving User ------------------");
-			User user = User.builder().firstName("José").adress(adress).build();
+			User user = User.builder().id_user(1).firstName("José").adress(adress).build();
 			int userId = user.getId_user();
 			userService.add(user);
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
@@ -431,7 +430,7 @@ public class UserControllerTest {
 	public void testDeleteUser() {
 		LOGGER.info("------------------ Testing testDeleteUser Method ------------------");
 		LOGGER.info("------------------ Constructing User ------------------");
-		User user = User.builder().firstName("José").adress(adress).build();
+		User user = User.builder().id_user(1).firstName("José").adress(adress).build();
 		int userId = user.getId_user();
 		userService.add(user);
 		LOGGER.info("------------------ Saving User ------------------");
