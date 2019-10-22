@@ -10,33 +10,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inti.formation.entity.Station;
+import com.inti.formation.entity.TablePorteuseStation_Line_Vehicle;
 import com.inti.formation.iservice.IStationService;
-
+import com.inti.formation.iservice.ITablePorteuseService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/apiStation")
-public class StationController {
+@RequestMapping("/apiTablePorteuse")
+public class TablePorteuseController {
 	
-	private IStationService metier;
+	private ITablePorteuseService metier;
 	
 	 @RequestMapping(value="/add", method=RequestMethod.POST)
-	    public Station add(@RequestBody Station s) {
-	    	return metier.add(s);
+	    public TablePorteuseStation_Line_Vehicle add(@RequestBody TablePorteuseStation_Line_Vehicle tp) {
+	    	return metier.add(tp);
 	    }
 	    
 	    @RequestMapping(value="/update", method=RequestMethod.PUT)
-	    public Station update(@RequestBody Station s) {
-	    	return metier.update(s);
+	    public TablePorteuseStation_Line_Vehicle update(@RequestBody TablePorteuseStation_Line_Vehicle tp) {
+	    	return metier.update(tp);
 	    }
 	    
-	    @RequestMapping(value="/get/{id}", method=RequestMethod.GET)
-	    public Station getById(@PathVariable int id) {
+	    @RequestMapping(value="/get/{id_station}/{id_line}/{id_vehicle}", method=RequestMethod.GET)
+	    public TablePorteuseStation_Line_Vehicle getById(@PathVariable int id) {
 	    	return metier.getById(id);
 	    }
 	    
-	    @RequestMapping(value="/stations", method=RequestMethod.GET)
-	    public List<Station> findAll() {
+	    @RequestMapping(value="/tableporteuses", method=RequestMethod.GET)
+	    public List<TablePorteuseStation_Line_Vehicle> findAll() {
 	    	return metier.findAll();
 	    }
 	    
