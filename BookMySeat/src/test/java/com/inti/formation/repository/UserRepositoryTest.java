@@ -1,12 +1,15 @@
 package com.inti.formation.repository;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -68,7 +71,7 @@ public class UserRepositoryTest {
 		userRepo.deleteById(dhia.getId_user());
 		// then
 		LOGGER.info("____________Test Null ________________");
-		assertNull(userRepo.getOne(dhia.getId_user()));
+		assertFalse(userRepo.findById(dhiaId).isPresent());
 	}
 
 	@Test
@@ -79,7 +82,7 @@ public class UserRepositoryTest {
 		userRepo.getOne(dhia.getId_user());
 		// then
 		LOGGER.info("____________Test equal________________");
-		assertEquals("Dhia",userRepo.getOne(dhia.getId_user()).getName());
+		assertEquals("Dhia", userRepo.getOne(dhiaId).getName());
 	}
 
 }
