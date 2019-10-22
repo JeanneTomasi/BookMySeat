@@ -1,6 +1,7 @@
 package com.inti.formation.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,8 +32,8 @@ public class TransitTime implements Serializable{
 	private int id_transit_time;
 	private String heure_passage;
 	@OneToMany(mappedBy = "transit_time")
-	private Vehicle vehicle;
+	private List<Vehicle> vehicle;
 	@OneToMany(mappedBy = "transit_time")
-	private Line line;
+	private List<Station> station;
 	
 }

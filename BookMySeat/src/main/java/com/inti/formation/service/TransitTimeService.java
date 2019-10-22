@@ -3,11 +3,12 @@ package com.inti.formation.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.inti.formation.entity.TransitTime;
 import com.inti.formation.iservice.ITransitTimeService;
 import com.inti.formation.repository.ITransitTimeRepository;
-
+@Service
 public class TransitTimeService implements ITransitTimeService {
 
 	@Autowired

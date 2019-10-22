@@ -1,6 +1,7 @@
 package com.inti.formation.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,6 +34,6 @@ public class Line implements Serializable {
 	private String name;
 	private String localisation;
 	@OneToMany(mappedBy = "line")
-	private Vehicle vehicle;
+	private List<Vehicle> vehicle;
 	
 }
