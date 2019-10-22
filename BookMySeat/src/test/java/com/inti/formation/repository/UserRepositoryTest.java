@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -49,13 +50,13 @@ public class UserRepositoryTest {
 
 		LOGGER.info("____________Test givenEntityRepository .save Method________________");
 		LOGGER.info("____________ Set newGivenEntity ________________");
-		User user = User.builder().name("Vincent").adress(new Adress(27, "bd Eugène Deruelle", "Lyon", 69003, "France")).dateDeNaissance((Date.parse(Calendar.set(1988, 03, 22))).build();
+		User user = User.builder().name("Vincent").adress(new Adress(27, "bd Eugène Deruelle", "Lyon", 69003, "France")).dateDeNaissance(LocalDate.of(1988, Month.MARCH, 22)).build();
 		// when
 		LOGGER.info("____________ Save givenEntity ________________");
 		userRepo.save(user);
 		// then
 		LOGGER.info("____________Test equal ________________");
-		assertEquals(user, userRepo.findById(user.getId_user()));
+		assertEquals(user, userRepo.findById(user.getId_user()).get());
 
 	}
 

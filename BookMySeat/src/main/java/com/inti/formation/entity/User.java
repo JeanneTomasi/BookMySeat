@@ -10,8 +10,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,7 +33,6 @@ public class User implements Serializable{
 	private int id_user;
 	private String name;
 	private String firstName;
-	@Temporal(value=TemporalType.DATE)
 	private LocalDate dateDeNaissance;
 	@Embedded
 	private Adress adress;
