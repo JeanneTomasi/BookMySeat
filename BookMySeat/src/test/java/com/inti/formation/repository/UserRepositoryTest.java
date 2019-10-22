@@ -75,6 +75,7 @@ public class UserRepositoryTest {
 		// then
 		LOGGER.info("____________Test Null ________________");
 		assertFalse(userRepo.findById(dhiaId).isPresent());
+
 	}
 
 	@Test
@@ -98,6 +99,7 @@ public class UserRepositoryTest {
 		LOGGER.info("____________Test list lenght ________________");
 		int userNumber = users.size();
 		assertTrue(userNumber > 0);
+
 	}
 
 }
