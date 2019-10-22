@@ -83,22 +83,17 @@ public class UserControllerTest {
 	 */
 
 	
-	// Test du statut
+	// Test du statut de .add
 
 	@Test
-	public void testAddStatus() {
-		LOGGER.info("------------------ Testing testAddStatus Method ------------------");
-		LOGGER.info("------------------ Constructing User ------------------");
-		User user = new User();
+	public void test_Http_addEntity() {
+		LOGGER.info("------------------ Testing Http status for .add Method ------------------");
 		try {
 			LOGGER.info("------------------ Serializing User Object ------------------");
-			String inputJson = this.mapToJson(user);
+			String inputJson = this.mapToJson(new User());
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
-			MvcResult mvcResult;
-
-			mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri + "/add")
+			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri + "/add")
 					.contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-
 			LOGGER.info("------------------ Getting HTTP Status ------------------");
 			int status = mvcResult.getResponse().getStatus();
 			LOGGER.info("------------------ Verifying HTTP Status ------------------");
@@ -108,7 +103,7 @@ public class UserControllerTest {
 		}
 	}
 
-	// Test du retour
+	// Test du retour de .add
 
 	@Test
 	public void createEntity() {
@@ -137,7 +132,7 @@ public class UserControllerTest {
 	// Test de l'appel de la méthode du service
 
 	@Test
-	public void testAddUser() {
+	public void test_call_userService_getAllEntityList() {
 		LOGGER.info("------------------ Testing testAddUser Method ------------------");
 		LOGGER.info("------------------ Constructing User ------------------");
 		User user = new User();
