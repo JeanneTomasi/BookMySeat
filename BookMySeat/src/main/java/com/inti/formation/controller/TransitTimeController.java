@@ -9,33 +9,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.inti.formation.entity.TransportEntreprise;
-import com.inti.formation.iservice.ITransportEntrepriseService;
+import com.inti.formation.entity.TransitTime;
+import com.inti.formation.iservice.ITransitTimeService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/apiTransportEntreprise")
-public class TransportEntrepriseController {
+@RequestMapping("/apiTransitTime")
+public class TransitTimeController {
 	
-	private ITransportEntrepriseService metier;
+	private ITransitTimeService metier;
 	
-	@RequestMapping(value="/ajouter", method=RequestMethod.POST)
-    public TransportEntreprise ajouter(@RequestBody TransportEntreprise tre) {
-    	return metier.add(tre);
+	@RequestMapping(value="/add", method=RequestMethod.POST)
+    public TransitTime add(@RequestBody TransitTime tt) {
+    	return metier.add(tt);
     }
     
     @RequestMapping(value="/update", method=RequestMethod.PUT)
-    public TransportEntreprise update(@RequestBody TransportEntreprise tre) {
-    	return metier.update(tre);
+    public TransitTime update(@RequestBody TransitTime tt) {
+    	return metier.update(tt);
     }
     
     @RequestMapping(value="/get/{id}", method=RequestMethod.GET)
-    public TransportEntreprise getById(@PathVariable int id) {
+    public TransitTime getById(@PathVariable int id) {
     	return metier.getById(id);
     }
     
-    @RequestMapping(value="/transportEntreprises", method=RequestMethod.GET)
-    public List<TransportEntreprise> findAll() {
+    @RequestMapping(value="/transitTimes", method=RequestMethod.GET)
+    public List<TransitTime> findAll() {
     	return metier.findAll();
     }
     
@@ -44,7 +44,5 @@ public class TransportEntrepriseController {
     	metier.delete(id);
     }
 
-	
-	
 
 }

@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -29,5 +30,7 @@ public class Line implements Serializable {
 	private int id_line;
 	private String name;
 	private String localisation;
+	@OneToMany(mappedBy = "line")
+	private Vehicle vehicle;
 	
 }

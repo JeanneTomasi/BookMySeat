@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -28,4 +30,7 @@ public class Station implements Serializable {
 	private int id_station;
 	private String nom;
 	private String localisation;
+	@ManyToOne
+	@JoinColumn(name = "id_transit_time")
+	private TransitTime transit_time;
 }
