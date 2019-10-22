@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inti.formation.entity.Station;
+import com.inti.formation.entity.TablePorteuseId;
 import com.inti.formation.entity.TablePorteuseStation_Line_Vehicle;
 import com.inti.formation.iservice.IStationService;
 import com.inti.formation.iservice.ITablePorteuseService;
@@ -32,7 +33,7 @@ public class TablePorteuseController {
 	    }
 	    
 	    @RequestMapping(value="/get/{id_station}/{id_line}/{id_vehicle}", method=RequestMethod.GET)
-	    public TablePorteuseStation_Line_Vehicle getById(@PathVariable int id) {
+	    public TablePorteuseStation_Line_Vehicle getById(@PathVariable TablePorteuseId id) {
 	    	return metier.getById(id);
 	    }
 	    
@@ -42,7 +43,7 @@ public class TablePorteuseController {
 	    }
 	    
 	    @RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
-	    public void delete(@PathVariable int id) {
+	    public void delete(@PathVariable TablePorteuseId id) {
 	    	metier.delete(id);
 	    }
 
