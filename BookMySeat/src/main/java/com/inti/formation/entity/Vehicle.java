@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -43,12 +44,18 @@ public class Vehicle implements Serializable {
 	private double fullRate;
 	@OneToMany(mappedBy = "vehicle")
 	private List<Seat> seat;
-	@OneToMany(mappedBy = "id_vehicles")
-	private List<TablePorteuseStation_Line_Vehicle> arrets;
+	@ManyToOne
+	@JoinColumn(name = "id_line")
+	private Line line;
+	@ManyToOne
+	@JoinColumn(name = "id_transit_time")
+	private TransitTime transit_time;
 	
 //	public void fullRateValue(){
 //		this.placesLeft = this.capacity-this.passengers;
 //		this.fullRate = this.passengers/this.capacity*100;
 //	}
+
+
 	
 }
