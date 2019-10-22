@@ -77,10 +77,10 @@ public class UserControllerTest {
 	//Test du statut
 	
 	@Test
-	public void findAllUserListStatus() {
+	public void findAllEntityListStatus() {
 		MvcResult mvcResult;
 		try {
-			LOGGER.info("------------------ Testing findAllUserStatus Method ------------------");
+			LOGGER.info("------------------ Testing findAllEntityStatus Method ------------------");
 			LOGGER.info("------------------ Constructing User ------------------");
 			LOGGER.info("------------------ Saving User ------------------");
 			userService.add(User.builder().firstName("José").build());
@@ -97,13 +97,13 @@ public class UserControllerTest {
 		}
 	}
 	
-	//Test du retour
+	//Test du retour de la méthode
 	
 	@Test
-	public void findAllUserList() {
+	public void findAllEntityList() {
 		MvcResult mvcResult;
 		try {
-			LOGGER.info("------------------ Testing findAllUser Method ------------------");
+			LOGGER.info("------------------ Testing findAllEntity Method ------------------");
 			LOGGER.info("------------------ Constructing User ------------------");
 			LOGGER.info("------------------ Saving User ------------------");
 			userService.add(User.builder().firstName("José").build());
@@ -120,23 +120,50 @@ public class UserControllerTest {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	//Test de l'appel de la méthode du service
+
+	//Vérification de l'appel à la méthode du service (utilisation du Mock) 
 	
 	@Test
-	public void testfindAll() {
-		LOGGER.info("------------------ Testing testfindAll Method ------------------");
+	public void testfindAllUsers() {
+		LOGGER.info("------------------ Testing testfindAllUsers Method ------------------");
 		userController.findAll();
 		LOGGER.info("------------------ Verifying findAll Method ------------------");
 		verify(userServiceToMock).findAll();
 	}
 
 	
-	//
+	//Test de la méthode add()
+	
+	//Test du statut
+	
 	@Test
-	public void createEntity() {
-		LOGGER.info("------------------ Testing createEntity Method ------------------");
+	public void testStatutAddUser() {
+		LOGGER.info("------------------ Testing testStatutAjoutUtilisateur Method ------------------");
+		LOGGER.info("------------------ Constructing Utilisateur ------------------");
+		User user = new User();
+		try {
+			LOGGER.info("------------------ Serializing Utilisateur Object ------------------");
+			String inputJson = this.mapToJson(user);
+			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
+			MvcResult mvcResult;
+
+			mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri + "/add")
+					.contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
+
+			LOGGER.info("------------------ Getting HTTP Status ------------------");
+			int status = mvcResult.getResponse().getStatus();
+			LOGGER.info("------------------ Verifying HTTP Status ------------------");
+			assertEquals(200, status);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//Test du retour
+	
+	@Test
+	public void addUser() {
+		LOGGER.info("------------------ Testing addUser Method ------------------");
 		LOGGER.info("------------------ Constructing Utilisateur ------------------");
 		User user = userService.add(User.builder().firstName("José").build());
 		int userId = user.getId_user();
@@ -159,29 +186,8 @@ public class UserControllerTest {
 	}
 
 
-	@Test
-	public void testStatutAjoutUtilisateur() {
-		LOGGER.info("------------------ Testing testStatutAjoutUtilisateur Method ------------------");
-		LOGGER.info("------------------ Constructing Utilisateur ------------------");
-		User user = new User();
-		try {
-			LOGGER.info("------------------ Serializing Utilisateur Object ------------------");
-			String inputJson = this.mapToJson(user);
-			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
-			MvcResult mvcResult;
-
-			mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri + "/add")
-					.contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-
-			LOGGER.info("------------------ Getting HTTP Status ------------------");
-			int status = mvcResult.getResponse().getStatus();
-			LOGGER.info("------------------ Verifying HTTP Status ------------------");
-			assertEquals(200, status);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
+	//Vérification de l'appel à la méthode du service (utilisation du Mock) 
+	
 	@Test
 	public void testAjoutUtilisateur() {
 		LOGGER.info("------------------ Testing testAjoutUtilisateur Method ------------------");
@@ -193,6 +199,12 @@ public class UserControllerTest {
 		verify(userServiceToMock).add(user);
 	}
 
+	
+	
+	
+	
+	
+	
 
 	@Test
 	public void updateEntity() {
@@ -240,7 +252,7 @@ public class UserControllerTest {
 			LOGGER.info("------------------ Verifying HTTP Status ------------------");
 			assertEquals(200, status);
 			LOGGER.info("------------------ Searching for Utilisateur ------------------");
-			User userFound = userService.getUserById(new Long(2));
+			User userFound = userService.getById();
 			LOGGER.info("------------------ Verifying Utilisateur ------------------");
 			assertEquals(userFound, null);
 
