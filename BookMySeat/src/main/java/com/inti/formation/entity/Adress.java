@@ -23,6 +23,5 @@ public class Adress {
 	private String city;
 	private int postalCode;
 	private String country;
-	
 
 }
