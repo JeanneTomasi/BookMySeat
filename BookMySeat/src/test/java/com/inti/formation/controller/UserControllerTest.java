@@ -72,15 +72,19 @@ public class UserControllerTest {
 	}
 
 	
-	//Tests du findAll()
+	/**
+	 * 
+	 * TEST FINDALL()
+	 * 
+	 */
 	
 	//Test du statut
 	
 	@Test
-	public void findAllUserListStatus() {
+	public void testfindAllStatus() {
 		MvcResult mvcResult;
 		try {
-			LOGGER.info("------------------ Testing findAllUserStatus Method ------------------");
+			LOGGER.info("------------------ Testing findAllStatus Method ------------------");
 			LOGGER.info("------------------ Constructing User ------------------");
 			LOGGER.info("------------------ Saving User ------------------");
 			userService.add(User.builder().firstName("José").build());
@@ -103,7 +107,7 @@ public class UserControllerTest {
 	public void findAllUserList() {
 		MvcResult mvcResult;
 		try {
-			LOGGER.info("------------------ Testing findAllUser Method ------------------");
+			LOGGER.info("------------------ Testing findAllUserList Method ------------------");
 			LOGGER.info("------------------ Constructing User ------------------");
 			LOGGER.info("------------------ Saving User ------------------");
 			userService.add(User.builder().firstName("José").build());
@@ -133,7 +137,40 @@ public class UserControllerTest {
 	}
 
 	
-	//
+	/**
+	 * 
+	 * TEST ADD()
+	 * 
+	 */
+	
+	
+	//Test du statut
+	
+	@Test
+	public void testAddStatus() {
+		LOGGER.info("------------------ Testing testAddStatus Method ------------------");
+		LOGGER.info("------------------ Constructing User ------------------");
+		User user = new User();
+		try {
+			LOGGER.info("------------------ Serializing User Object ------------------");
+			String inputJson = this.mapToJson(user);
+			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
+			MvcResult mvcResult;
+
+			mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri + "/add")
+					.contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
+
+			LOGGER.info("------------------ Getting HTTP Status ------------------");
+			int status = mvcResult.getResponse().getStatus();
+			LOGGER.info("------------------ Verifying HTTP Status ------------------");
+			assertEquals(200, status);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//Test du retour
+	
 	@Test
 	public void createEntity() {
 		LOGGER.info("------------------ Testing createEntity Method ------------------");
@@ -157,30 +194,9 @@ public class UserControllerTest {
 			e.printStackTrace();
 		}
 	}
+	
 
-
-	@Test
-	public void testStatutAjoutUtilisateur() {
-		LOGGER.info("------------------ Testing testStatutAjoutUtilisateur Method ------------------");
-		LOGGER.info("------------------ Constructing Utilisateur ------------------");
-		User user = new User();
-		try {
-			LOGGER.info("------------------ Serializing Utilisateur Object ------------------");
-			String inputJson = this.mapToJson(user);
-			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
-			MvcResult mvcResult;
-
-			mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri + "/add")
-					.contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-
-			LOGGER.info("------------------ Getting HTTP Status ------------------");
-			int status = mvcResult.getResponse().getStatus();
-			LOGGER.info("------------------ Verifying HTTP Status ------------------");
-			assertEquals(200, status);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	//Test de l'appel de la méthode du service
 
 	@Test
 	public void testAjoutUtilisateur() {
@@ -193,20 +209,29 @@ public class UserControllerTest {
 		verify(userServiceToMock).add(user);
 	}
 
+	
+	/**
+	 * 
+	 * TEST UPDATE()
+	 * 
+	 */
+	
+	//Test du statut
 
 	@Test
-	public void updateEntity() {
+	public void updateUser() {
 
 		try {
-			LOGGER.info("------------------ Testing updateEntity Method ------------------");
-			LOGGER.info("------------------ Constructing Utilisateur ------------------");
-			User oldUser = new User(2, "Lemon");
-			LOGGER.info("------------------ Saving Utilisateur ------------------");
-			userService.addUser(oldUser);
-			LOGGER.info("------------------ Modifying Utilisateur ------------------");
+			LOGGER.info("------------------ Testing updateUser Method ------------------");
+			LOGGER.info("------------------ Constructing User ------------------");
+			User oldUser = userService.add(User.builder().firstName("José").build());
+			LOGGER.info("------------------ Saving User ------------------");
+			userService.add(oldUser);
+			LOGGER.info("------------------ Modifying User ------------------");
+			oldUser.setFirstName("Ricco");
 			User newUser = new User(2, "Lemonade");
 
-			LOGGER.info("------------------ Serializing Utilisateur Object ------------------");
+			LOGGER.info("------------------ Serializing User Object ------------------");
 			String inputJson = this.mapToJson(newUser);
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
 			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(uri + "/2")
@@ -215,23 +240,35 @@ public class UserControllerTest {
 			int status = mvcResult.getResponse().getStatus();
 			LOGGER.info("------------------ Verifying HTTP Status ------------------");
 			assertEquals(200, status);
-			LOGGER.info("------------------ Searching for Utilisateur ------------------");
+			LOGGER.info("------------------ Searching for User ------------------");
 			User userFound = userService.getUserById(new Long(2));
-			LOGGER.info("------------------ Verifying Utilisateur ------------------");
+			LOGGER.info("------------------ Verifying User ------------------");
 			assertEquals(userFound.getUserName(), newUser.getUserName());
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	//Test du retour
+	
+	//Test de l'appel de la méthode du service
 
+	
+	/**
+	 * 
+	 * TEST DELETE()
+	 * 
+	 */
+
+	//Test du statut
 	@Test
-	public void deleteEntity() {
+	public void deleteEntityStatus() {
 		LOGGER.info("------------------ Testing deleteEntity Method ------------------");
 
 		try {
 			LOGGER.info("------------------ Constructing Utilisateur ------------------");
-			LOGGER.info("------------------ Savinf Utilisateur ------------------");
+			LOGGER.info("------------------ Saving Utilisateur ------------------");
 			userService.addUser(new User(2, "Lemon"));
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
 			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri + "/2")).andReturn();
@@ -248,6 +285,33 @@ public class UserControllerTest {
 			e.printStackTrace();
 		}
 	}
+	
+	//Test du retour
+	@Test
+	public void deleteEntity() {
+		LOGGER.info("------------------ Testing deleteEntity Method ------------------");
+
+		try {
+			LOGGER.info("------------------ Constructing Utilisateur ------------------");
+			LOGGER.info("------------------ Saving Utilisateur ------------------");
+			userService.addUser(new User(2, "Lemon"));
+			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
+			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri + "/2")).andReturn();
+			LOGGER.info("------------------ Getting HTTP Status ------------------");
+			int status = mvcResult.getResponse().getStatus();
+			LOGGER.info("------------------ Verifying HTTP Status ------------------");
+			assertEquals(200, status);
+			LOGGER.info("------------------ Searching for Utilisateur ------------------");
+			User userFound = userService.getUserById(new Long(2));
+			LOGGER.info("------------------ Verifying Utilisateur ------------------");
+			assertEquals(userFound, null);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	//Test de l'appel de la méthode du service
+
 
 	/**
 	 * Serialize the given object into Json
