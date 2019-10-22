@@ -30,7 +30,7 @@ public class Station implements Serializable {
 	@Id
 	@GeneratedValue
 	private int id_station;
-	private String nom;
+	private String name;
 	private String localisation;
 	@ManyToOne
 	@JoinColumn(name = "id_transit_time")
