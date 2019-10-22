@@ -4,11 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.Before;
@@ -53,7 +55,8 @@ public class UserRepositoryTest {
 
 		LOGGER.info("____________Test givenEntityRepository .save Method________________");
 		LOGGER.info("____________ Set newGivenEntity ________________");
-		User user = User.builder().name("Vincent").adress(new Adress(27, "bd Eugène Deruelle", "Lyon", 69003, "France")).dateDeNaissance(LocalDate.of(1988, Month.MARCH, 22)).build();
+		User user = User.builder().name("Vincent").adress(new Adress(27, "bd Eugène Deruelle", "Lyon", 69003, "France"))
+				.dateDeNaissance(LocalDate.of(1988, Month.MARCH, 22)).build();
 		// when
 		LOGGER.info("____________ Save givenEntity ________________");
 		userRepo.save(user);
@@ -83,6 +86,18 @@ public class UserRepositoryTest {
 		// then
 		LOGGER.info("____________Test equal________________");
 		assertEquals("Dhia", userRepo.getOne(dhiaId).getName());
+	}
+
+	@Test
+	public void givenEntityRepository_findAllMethod() {
+		LOGGER.info("____________Test givenEntityRepository .findAll Method________________");
+		// when
+		LOGGER.info("____________ findAll Entities ________________");
+		List<User> users = userRepo.findAll();
+		// then
+		LOGGER.info("____________Test list lenght ________________");
+		int userNumber = users.size();
+		assertTrue(userNumber > 0);
 	}
 
 }
