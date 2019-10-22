@@ -3,7 +3,11 @@ package com.inti.formation.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,27 +23,27 @@ public class CollectivityController {
 
 	private ICollectivityService metier;
 	
-    @RequestMapping(value="/ajouter", method=RequestMethod.POST)
+    @PostMapping(value="/add")
     public Collectivity ajouter(@RequestBody Collectivity c) {
     	return metier.add(c);
     }
     
-    @RequestMapping(value="/update", method=RequestMethod.PUT)
+    @PutMapping(value="/update")
     public Collectivity update(@RequestBody Collectivity c) {
     	return metier.update(c);
     }
     
-    @RequestMapping(value="/get/{id}", method=RequestMethod.GET)
+    @GetMapping(value="/get/{id}")
     public Collectivity getById(@PathVariable int id) {
     	return metier.getById(id);
     }
     
-    @RequestMapping(value="/collectivities", method=RequestMethod.GET)
+    @GetMapping(value="/collectivities")
     public List<Collectivity> findAll() {
     	return metier.findAll();
     }
     
-    @RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
+    @DeleteMapping(value="/delete/{id}")
     public void delete(@PathVariable int id) {
     	metier.delete(id);
     }
