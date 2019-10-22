@@ -1,15 +1,14 @@
 package com.inti.formation.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.inti.formation.entity.Vehicle.VehicleBuilder;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,6 +32,7 @@ public class Station implements Serializable {
 	private int id_station;
 	private String nom;
 	private String localisation;
-	@OneToMany(mappedBy = "id_station")
-	private List<TablePorteuseStation_Line_Vehicle> arrets;
+	@ManyToOne
+	@JoinColumn(name = "id_transit_time")
+	private TransitTime transit_time;
 }

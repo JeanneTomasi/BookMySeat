@@ -20,13 +20,13 @@ public class CollectivityController {
 	private ICollectivityService metier;
 	
     @RequestMapping(value="/ajouter", method=RequestMethod.POST)
-    public Collectivity ajouter(@RequestBody Collectivity s) {
-    	return metier.add(s);
+    public Collectivity ajouter(@RequestBody Collectivity c) {
+    	return metier.add(c);
     }
     
     @RequestMapping(value="/update", method=RequestMethod.PUT)
-    public Collectivity update(@RequestBody Collectivity s) {
-    	return metier.update(s);
+    public Collectivity update(@RequestBody Collectivity c) {
+    	return metier.update(c);
     }
     
     @RequestMapping(value="/get/{id}", method=RequestMethod.GET)

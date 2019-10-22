@@ -23,13 +23,13 @@ public class VehicleController {
     private IVehicleService metier;
     
     @RequestMapping(value="/ajouter", method=RequestMethod.POST)
-    public Vehicle ajouter(@RequestBody Vehicle s) {
-    	return metier.add(s);
+    public Vehicle ajouter(@RequestBody Vehicle v) {
+    	return metier.add(v);
     }
     
     @RequestMapping(value="/update", method=RequestMethod.PUT)
-    public Vehicle update(@RequestBody Vehicle s) {
-    	return metier.update(s);
+    public Vehicle update(@RequestBody Vehicle v) {
+    	return metier.update(v);
     }
     
     @RequestMapping(value="/get/{id}", method=RequestMethod.GET)

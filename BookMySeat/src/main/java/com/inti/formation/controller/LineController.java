@@ -23,13 +23,13 @@ public class LineController {
     private ILineService metier;
     
     @RequestMapping(value="/ajouter", method=RequestMethod.POST)
-    public Line ajouter(@RequestBody Line s) {
-    	return metier.add(s);
+    public Line ajouter(@RequestBody Line l) {
+    	return metier.add(l);
     }
     
     @RequestMapping(value="/update", method=RequestMethod.PUT)
-    public Line update(@RequestBody Line s) {
-    	return metier.update(s);
+    public Line update(@RequestBody Line l) {
+    	return metier.update(l);
     }
     
     @RequestMapping(value="/get/{id}", method=RequestMethod.GET)
