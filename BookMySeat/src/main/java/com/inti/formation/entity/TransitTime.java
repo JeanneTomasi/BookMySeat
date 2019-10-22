@@ -30,7 +30,7 @@ public class TransitTime implements Serializable{
 	@Id
 	@GeneratedValue
 	private int id_transit_time;
-	private String heure_passage;
+	private String transit_time;
 	@OneToMany(mappedBy = "transit_time")
 	private List<Vehicle> vehicle;
 	@OneToMany(mappedBy = "transit_time")

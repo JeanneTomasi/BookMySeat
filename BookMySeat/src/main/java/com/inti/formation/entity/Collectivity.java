@@ -29,7 +29,7 @@ public class Collectivity implements Serializable{
 	@Id
 	@GeneratedValue
 	private int id_collectivity;
-	private String nom;
+	private String name;
 //	zone sur laquelle la collectivité officie
 	private String operation_area;
 	@OneToOne(mappedBy = "collectivity")
