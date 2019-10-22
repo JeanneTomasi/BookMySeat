@@ -115,38 +115,14 @@ public class UserControllerTest {
 		LOGGER.info("------------------ Constructing Mockito reponse ------------------");
 		Mockito.when(userServiceToMock.add(user)).thenReturn(User.builder().firstName("Patate").build());
 		LOGGER.info("------------------- Test return of addEntity ----------------------");
-		assertEquals("Patate", userServiceToMock.add(user));
+		assertEquals(User.builder().firstName("Patate").build(), userController.add(user));
 	}
-//	@Test
-//	public void test_return_addEntity() {
-//		LOGGER.info("------------------ Testing createEntity Method ------------------");
-//		LOGGER.info("------------------ Constructing User ------------------");
-//		User user = User.builder().id_user(1).firstName("José").adress(adress).build();
-//		int userId = user.getId_user();
-//		MvcResult mvcResult;
-//		try {
-//			LOGGER.info("------------------ Serializing User Object ------------------");
-//			String inputJson = this.mapToJson(user);
-//			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
-//			mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri + "/add")
-//					.contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-//			LOGGER.info("------------------ Searching for User ------------------");
-//			User userFound = userService.getById(userId);
-//			LOGGER.info("------------------ Verifying User ------------------");
-//			assertEquals(userFound.getFirstName(), user.getFirstName());
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	// Test de l'appel de la méthode du service
 
 	@Test
-	public void test_call_userService_getAllEntityList() {
-		LOGGER.info("------------------ Testing testAddUser Method ------------------");
-		LOGGER.info("------------------ Constructing User ------------------");
-		User user = new User();
+	public void test_call_userService_addEntity() {
+		LOGGER.info("------------------ Testing the call of the good Service Method ------------------");
 		LOGGER.info("------------------ Saving User ------------------");
 		userController.add(user);
 		LOGGER.info("------------------ Verifying add Method ------------------");
@@ -161,7 +137,48 @@ public class UserControllerTest {
 	 * 
 	 */
 
-	
+	// Test du statut de .update
+
+		@Test
+		public void test_Http_updateEntity() {
+			LOGGER.info("------------------ Testing Http status for .update Method ------------------");
+			try {
+				LOGGER.info("------------------ Serializing User Object ------------------");
+				String inputJson = this.mapToJson(user);
+				LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
+				MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(uri + "/edit/"+user.getId_user())
+						.contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
+				LOGGER.info("------------------ Getting HTTP Status ------------------");
+				int status = mvcResult.getResponse().getStatus();
+				LOGGER.info("------------------ Verifying HTTP Status ------------------");
+				assertEquals(200, status);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		// Test du retour de .update
+
+		
+		@Test
+		public void test_return_updateEntity() {
+			LOGGER.info("------------------ Testing return of .update Method ------------------");
+			LOGGER.info("------------------ Constructing Mockito reponse ------------------");
+			Mockito.when(userServiceToMock.update(user)).thenReturn(User.builder().firstName("Patate").build());
+			LOGGER.info("------------------- Test return of addEntity ----------------------");
+			assertEquals(User.builder().firstName("Patate").build(), userController.update(user));
+		}
+
+		// Test de l'appel de la méthode du service
+
+		@Test
+		public void test_call_userService_updateEntity() {
+			LOGGER.info("------------------ Testing call of UserService.update Method ------------------");
+			LOGGER.info("------------------ Saving User ------------------");
+			userController.update(user);
+			LOGGER.info("------------------ Verifying add Method ------------------");
+			verify(userServiceToMock).update(user);
+		}
 	// Test du statut
 	@Test
 	public void testUpdateUserStatus() {
