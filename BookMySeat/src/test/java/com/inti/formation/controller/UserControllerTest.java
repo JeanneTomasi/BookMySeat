@@ -36,8 +36,6 @@ import com.inti.formation.entity.User;
 import com.inti.formation.repository.UserRepositoryTest;
 import com.inti.formation.service.UserService;
 
-import junit.framework.Assert;
-
 @WebAppConfiguration
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BookMySeatApplication.class)
