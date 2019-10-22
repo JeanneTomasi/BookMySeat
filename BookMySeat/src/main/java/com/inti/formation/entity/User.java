@@ -1,7 +1,8 @@
 package com.inti.formation.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -35,7 +36,7 @@ public class User implements Serializable{
 	private String name;
 	private String firstName;
 	@Temporal(value=TemporalType.DATE)
-	private Date dateDeNaissance;
+	private LocalDate dateDeNaissance;
 	@Embedded
 	private Adress adress;
 	private String email;
