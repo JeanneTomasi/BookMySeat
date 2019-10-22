@@ -30,6 +30,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inti.formation.BookMySeatApplication;
+import com.inti.formation.entity.Adress;
 import com.inti.formation.entity.User;
 import com.inti.formation.repository.UserRepositoryTest;
 import com.inti.formation.service.UserService;
@@ -72,6 +73,7 @@ public class UserControllerTest {
 		this.uri = "/apiUser";
 	}
 
+	private Adress adress = new Adress(1, "yolo", "youpi", 32000, "yipo");
 	
 	
 	/**
@@ -112,9 +114,9 @@ public class UserControllerTest {
 	public void createEntity() {
 		LOGGER.info("------------------ Testing createEntity Method ------------------");
 		LOGGER.info("------------------ Constructing User ------------------");
-		User user = userService.add(User.builder().firstName("Bernard").build());
+		User user = User.builder().firstName("José").adress(adress).build();
 		int userId = user.getId_user();
-
+		userService.add(user);
 		MvcResult mvcResult;
 		try {
 			LOGGER.info("------------------ Serializing User Object ------------------");
@@ -161,7 +163,7 @@ public class UserControllerTest {
 		try {
 			LOGGER.info("------------------ Testing testUpdateUserStatus Method ------------------");
 			LOGGER.info("------------------ Constructing User ------------------");
-			User oldUser = userService.add(User.builder().firstName("Bernard").build());
+			User oldUser = userService.add(User.builder().firstName("José").adress(adress).build());
 			LOGGER.info("------------------ Saving User ------------------");
 			userService.add(oldUser);
 			LOGGER.info("------------------ Modifying User ------------------");
@@ -191,7 +193,7 @@ public class UserControllerTest {
 		try {
 			LOGGER.info("------------------ Testing updateUser Method ------------------");
 			LOGGER.info("------------------ Constructing User ------------------");
-			User oldUser = userService.add(User.builder().firstName("Bernard").build());
+			User oldUser = userService.add(User.builder().firstName("José").adress(adress).build());
 			LOGGER.info("------------------ Saving User ------------------");
 			userService.add(oldUser);
 			LOGGER.info("------------------ Modifying User ------------------");
@@ -221,7 +223,7 @@ public class UserControllerTest {
 	public void testUpdateUser() {
 		LOGGER.info("------------------ Testing testUpdateUser Method ------------------");
 		LOGGER.info("------------------ Constructing User ------------------");
-		User oldUser = userService.add(User.builder().firstName("Bernard").build());
+		User oldUser = User.builder().firstName("José").adress(adress).build();
 		LOGGER.info("------------------ Saving User ------------------");
 		userService.add(oldUser);
 		LOGGER.info("------------------ Modifying User ------------------");
@@ -249,8 +251,9 @@ public class UserControllerTest {
 		try {
 			LOGGER.info("------------------ Constructing User ------------------");
 			LOGGER.info("------------------ Saving User ------------------");
-			User user = userService.add(User.builder().firstName("Bernard").build());
+			User user = User.builder().firstName("José").adress(adress).build();
 			int userId = user.getId_user();
+			userService.add(user);
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
 			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri + "/get/" + userId)).andReturn();
 			LOGGER.info("------------------ Getting HTTP Status ------------------");
@@ -271,7 +274,7 @@ public class UserControllerTest {
 		try {
 			LOGGER.info("------------------ Constructing User ------------------");
 			LOGGER.info("------------------ Saving User ------------------");
-			User user = userService.add(User.builder().firstName("Bernard").build());
+			User user = userService.add(User.builder().firstName("José").adress(adress).build());
 			int userId = user.getId_user();
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
 			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri + "/get/" + userId)).andReturn();
@@ -292,8 +295,9 @@ public class UserControllerTest {
 	public void getDeleteUser() {
 		LOGGER.info("------------------ Testing getDeleteUser Method ------------------");
 		LOGGER.info("------------------ Constructing User ------------------");
-		User user = userService.add(User.builder().firstName("Bernard").build());
+		User user = User.builder().firstName("José").adress(adress).build();
 		int userId = user.getId_user();
+		userService.add(user);
 		LOGGER.info("------------------ Saving User ------------------");
 		userController.add(user);
 		LOGGER.info("------------------ Getting User ------------------");
@@ -320,7 +324,7 @@ public class UserControllerTest {
 			LOGGER.info("------------------ Testing findAllStatus Method ------------------");
 			LOGGER.info("------------------ Constructing User ------------------");
 			LOGGER.info("------------------ Saving User ------------------");
-			userService.add(User.builder().firstName("Bernard").build());
+			userService.add(User.builder().firstName("José").adress(adress).build());
 			LOGGER.info("------------------ Mocking Context Webservice ------------------");
 			mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri + "/users").accept(MediaType.APPLICATION_JSON_VALUE))
 					.andReturn();
@@ -342,7 +346,7 @@ public class UserControllerTest {
 			LOGGER.info("------------------ Testing findAllUserList Method ------------------");
 			LOGGER.info("------------------ Constructing User ------------------");
 			LOGGER.info("------------------ Saving User ------------------");
-			userService.add(User.builder().firstName("Bernard").build());
+			userService.add(User.builder().firstName("José").adress(adress).build());
 			LOGGER.info("------------------ Mocking Context Webservice ------------------");
 			mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri + "/users").accept(MediaType.APPLICATION_JSON_VALUE))
 					.andReturn();
@@ -383,8 +387,10 @@ public class UserControllerTest {
 		try {
 			LOGGER.info("------------------ Constructing User ------------------");
 			LOGGER.info("------------------ Saving User ------------------");
-			User user = userService.add(User.builder().firstName("Bernard").build());
+			User user = User.builder().firstName("José").adress(adress).build();
 			int userId = user.getId_user();
+			userService.add(user);
+
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
 			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri + "/delete/" + userId)).andReturn();
 			LOGGER.info("------------------ Getting HTTP Status ------------------");
@@ -405,8 +411,9 @@ public class UserControllerTest {
 		try {
 			LOGGER.info("------------------ Constructing User ------------------");
 			LOGGER.info("------------------ Saving User ------------------");
-			User user = userService.add(User.builder().firstName("Bernard").build());
+			User user = User.builder().firstName("José").adress(adress).build();
 			int userId = user.getId_user();
+			userService.add(user);
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
 			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri + "/delete/" + userId)).andReturn();
 			LOGGER.info("------------------ Searching for User ------------------");
@@ -424,8 +431,9 @@ public class UserControllerTest {
 	public void testDeleteUser() {
 		LOGGER.info("------------------ Testing testDeleteUser Method ------------------");
 		LOGGER.info("------------------ Constructing User ------------------");
-		User user = userService.add(User.builder().firstName("Bernard").build());
+		User user = User.builder().firstName("José").adress(adress).build();
 		int userId = user.getId_user();
+		userService.add(user);
 		LOGGER.info("------------------ Saving User ------------------");
 		userController.add(user);
 		LOGGER.info("------------------ Deleting User ------------------");
