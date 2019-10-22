@@ -2,7 +2,6 @@ package com.inti.formation.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
