@@ -2,10 +2,6 @@ package com.inti.formation.repository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,27 +15,26 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.inti.formation.entity.Adress;
-import com.inti.formation.entity.User;
+import com.inti.formation.entity.Vehicle;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-public class UserRepositoryTest {
+public class VehicleRepositoryTest {
 
 	@Autowired
 	private TestEntityManager entityManager;
 
 	@Autowired
-	private IUserRepository userRepo;
-	private static final Logger LOGGER = LoggerFactory.getLogger(UserRepositoryTest.class);
-	private User dhia;
+	private IVehicleRepository vehicleRepo;
+	private static final Logger LOGGER = LoggerFactory.getLogger(VehicleRepositoryTest.class);
+	private Vehicle dhia;
 	private int dhiaId;
 
 	@Before
 	public void setUp() {
 		// given
-		dhia = User.builder().name("Dhia").build();
+		dhia = Vehicle.builder().immatriculation("Dhia").build();
 		dhiaId = (int) entityManager.persistAndGetId(dhia);
 		LOGGER.info("____________ givenEntity saved ________________");
 	}
@@ -49,14 +44,13 @@ public class UserRepositoryTest {
 
 		LOGGER.info("____________Test givenEntityRepository .save Method________________");
 		LOGGER.info("____________ Set newGivenEntity ________________");
-		User user = User.builder().name("Vincent").adress(new Adress(27, "bd Eugène Deruelle", "Lyon", 69003, "France"))
-				.dateDeNaissance(LocalDate.of(1988, Month.MARCH, 22)).build();
+		Vehicle vehicle = Vehicle.builder().immatriculation("Vincent").build();
 		// when
 		LOGGER.info("____________ Save givenEntity ________________");
-		userRepo.save(user);
+		vehicleRepo.save(vehicle);
 		// then
 		LOGGER.info("____________Test equal ________________");
-		assertEquals(user, userRepo.findById(user.getId_user()).get());
+		assertEquals(vehicle, vehicleRepo.findById(vehicle.getId_vehicle()).get());
 
 	}
 
@@ -65,10 +59,10 @@ public class UserRepositoryTest {
 		LOGGER.info("____________Test givenEntityRepository .delete Method ________________");
 		// when
 		LOGGER.info("____________ Delete givenEntity ________________");
-		userRepo.deleteById(dhia.getId_user());
+		vehicleRepo.deleteById(dhia.getId_vehicle());
 		// then
 		LOGGER.info("____________Test Null ________________");
-		assertFalse(userRepo.findById(dhiaId).isPresent());
+		assertFalse(vehicleRepo.findById(dhiaId).isPresent());
 
 	}
 
@@ -77,24 +71,9 @@ public class UserRepositoryTest {
 		LOGGER.info("____________Test givenEntityRepository .getOne Method________________");
 		// when
 		LOGGER.info("____________ Delete givenEntity________________");
-		userRepo.getOne(dhia.getId_user());
+		vehicleRepo.getOne(dhia.getId_vehicle());
 		// then
 		LOGGER.info("____________Test equal________________");
-		assertEquals("Dhia", userRepo.getOne(dhiaId).getName());
+		assertEquals("Dhia", vehicleRepo.getOne(dhiaId).getImmatriculation());
 	}
-
-//	@Test
-//	public void givenEntityRepository_findAllMethod() {
-//		LOGGER.info("____________Test givenEntityRepository .findAll Method________________");
-//		User bayrem = User.builder().name("Bayrem").build();
-//		entityManager.persist(bayrem);
-//		// when
-//		LOGGER.info("____________ findAll Entities ________________");
-//		List<User> users = userRepo.findAll();
-//		// then
-//		LOGGER.info("____________Test list lenght ________________");
-//		assertNotNull(users);
-//
-//	}
-
 }
