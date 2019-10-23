@@ -16,7 +16,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.inti.formation.entity.Adress;
 import com.inti.formation.entity.User;
 
 @RunWith(SpringRunner.class)
@@ -46,7 +45,7 @@ public class UserRepositoryTest {
 
 		LOGGER.info("____________Test givenEntityRepository .save Method________________");
 		LOGGER.info("____________ Set newGivenEntity ________________");
-		User user = User.builder().name("Vincent").adress(new Adress(27, "bd Eugène Deruelle", "Lyon", 69003, "France"))
+		User user = User.builder().name("Vincent")
 				.dateDeNaissance(LocalDate.of(1988, Month.MARCH, 22)).build();
 		// when
 		LOGGER.info("____________ Save givenEntity ________________");

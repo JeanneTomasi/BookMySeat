@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +15,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -105,7 +105,20 @@ public class UserServiceTest {
 	@Test
 	public void return_user_for_findAll_method() {
 		LOGGER.info("______________ Test of .findAll Method return _______________");
-		Mockito.when(userRepo.findAll()).thenReturn(new ArrayList<User>().builder().firstName("Patate").build());
-		assertEquals(User.builder().firstName("Patate").build(), userService.getById(1));
+		List<User> users = new ArrayList<User>();
+		users.add(user);
+		users.add(User.builder().id_user(2).name("Ponyo").build());
+		Mockito.when(userRepo.findAll()).thenReturn(users);
+		assertEquals(users, userService.findAll());
+	}
+	
+	/**
+	 * Testing .delete method
+	 */
+	@Test
+	public void call_userRepo_delete_method() {
+		 LOGGER.info("______________ Test of .delete Method call _______________");
+		 userService.delete(1);
+		 verify(userRepo).deleteById(1);
 	}
 }
