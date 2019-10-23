@@ -2,6 +2,7 @@ package com.inti.formation.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import com.inti.formation.iservice.ICollectivityService;
 @RequestMapping("/apiCollectivity")
 public class CollectivityController {
 
+	@Autowired
 	private ICollectivityService metier;
 	
     @PostMapping(value="/add")
@@ -47,4 +49,5 @@ public class CollectivityController {
     	metier.delete(id);
     }
 
+	
 }
