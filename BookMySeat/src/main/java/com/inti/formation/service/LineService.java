@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.inti.formation.entity.Line;
 import com.inti.formation.iservice.ILineService;
 import com.inti.formation.repository.ILineRepository;
-import com.inti.formation.repository.ISeatRepository;
 
 @Service
 public class LineService implements ILineService {
