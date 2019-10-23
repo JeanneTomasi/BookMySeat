@@ -40,7 +40,7 @@ public class LineController {
     	return metier.getById(id);
     }
     
-    @GetMapping(value="/Lines")
+    @GetMapping(value="/lines")
     public List<Line> findAll() {
     	return metier.findAll();
     }
