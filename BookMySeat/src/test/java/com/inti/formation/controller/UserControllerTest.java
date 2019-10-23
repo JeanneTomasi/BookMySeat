@@ -1,6 +1,7 @@
 package com.inti.formation.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 
@@ -191,7 +192,7 @@ public class UserControllerTest {
 			LOGGER.info("------------------ Saving User ------------------");
 			userServiceToMock.add(user);
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
-			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri + "/get/{id}",user.getId_user()))
+			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri + "/get/"+user.getId_user()).accept(MediaType.APPLICATION_JSON_VALUE))
 					.andReturn();
 			LOGGER.info("------------------ Verifying HTTP Status ------------------");
 			assertEquals(200, mvcResult.getResponse().getStatus());
@@ -219,6 +220,7 @@ public class UserControllerTest {
 		LOGGER.info("------------------ Call method User ------------------");
 		userController.getById(1);
 		LOGGER.info("------------------ Verifying getById Method ------------------");
+		verify(userServiceToMock).getById(1);
 	}
 
 	/**
@@ -269,7 +271,7 @@ public class UserControllerTest {
 
 	@Test
 	public void test_call_userService_findAll() {
-		LOGGER.info("------------------ Testing testfindAll Method ------------------");
+		LOGGER.info("------------------ Testing call of UserService.findAll Method ------------------");
 		userController.findAll();
 		LOGGER.info("------------------ Verifying findAll Method ------------------");
 		verify(userServiceToMock).findAll();
@@ -281,66 +283,45 @@ public class UserControllerTest {
 	 * 
 	 */
 
-	// Test du statut
+	// Test du statut de .delete
 	@Test
-	public void deleteUserStatus() {
-		LOGGER.info("------------------ Testing deleteUserStatus Method ------------------");
+	public void test_Http_delete() {
+		
+		LOGGER.info("------------------ Testing Http status for .delete Method ------------------");
 
 		try {
-			LOGGER.info("------------------ Constructing User ------------------");
 			LOGGER.info("------------------ Saving User ------------------");
-			User user = User.builder().id_user(1).firstName("José").adress(adress).build();
-			int userId = user.getId_user();
 			userServiceToMock.add(user);
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
-			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri + "/delete/" + userId)).andReturn();
-			LOGGER.info("------------------ Getting HTTP Status ------------------");
-			int status = mvcResult.getResponse().getStatus();
+			MvcResult mvcResult = mvc
+					.perform(MockMvcRequestBuilders.delete(uri + "/delete/" + user.getId_user())).andReturn();
 			LOGGER.info("------------------ Verifying HTTP Status ------------------");
-			assertEquals(200, status);
+			assertEquals(200, mvcResult.getResponse().getStatus());
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	// Test du retour
-	@Test
-	public void deleteUser() {
-		LOGGER.info("------------------ Testing deleteUser Method ------------------");
-
-		try {
-			LOGGER.info("------------------ Constructing User ------------------");
-			LOGGER.info("------------------ Saving User ------------------");
-			User user = User.builder().id_user(1).firstName("José").adress(adress).build();
-			int userId = user.getId_user();
-			userServiceToMock.add(user);
-			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
-			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri + "/delete/" + userId)).andReturn();
-			LOGGER.info("------------------ Searching for User ------------------");
-			User userFound = userServiceToMock.getById(userId);
-			LOGGER.info("------------------ Verifying User ------------------");
-			assertEquals(userFound, null);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	// Test du retour de .delete
+//	@Test
+//	public void deleteUser() {
+//
+//		LOGGER.info("------------------ Testing return of .delete Method ------------------");
+//		LOGGER.info("------------------- Test return of findAll ----------------------");
+//		assertNull(userController.delete(1));
+//	}
 
 	// Test de l'appel de la méthode du service
 
 	@Test
-	public void testDeleteUser() {
-		LOGGER.info("------------------ Testing testDeleteUser Method ------------------");
-		LOGGER.info("------------------ Constructing User ------------------");
-		User user = User.builder().id_user(1).firstName("José").adress(adress).build();
-		int userId = user.getId_user();
-		userServiceToMock.add(user);
-		LOGGER.info("------------------ Saving User ------------------");
-		userController.add(user);
-		LOGGER.info("------------------ Deleting User ------------------");
-		userController.delete(userId);
+	public void test_call_userService_delete() {
+		
+
+		LOGGER.info("------------------ Testing call of UserService.delete Method ------------------");
+		userController.delete(1);
 		LOGGER.info("------------------ Verifying delete Method ------------------");
-		verify(userServiceToMock).delete(userId);
+		verify(userServiceToMock).delete(1);
 	}
 
 	/**
