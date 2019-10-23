@@ -187,8 +187,8 @@ public class SeatControllerTest {
 			LOGGER.info("------------------ Saving User ------------------");
 			seatServiceToMock.add(seat);
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
-			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri + "/get/"+seat.getId_seat()).accept(MediaType.APPLICATION_JSON_VALUE))
-					.andReturn();
+			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri + "/get/" + seat.getId_seat())
+					.accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 			LOGGER.info("------------------ Verifying HTTP Status ------------------");
 			assertEquals(200, mvcResult.getResponse().getStatus());
 
@@ -250,7 +250,7 @@ public class SeatControllerTest {
 
 	@Test
 	public void test_return_findAll_UserList() {
-		
+
 		LOGGER.info("------------------ Testing return of .findAll Method ------------------");
 		List<Seat> seats = new ArrayList<Seat>();
 		seats.add(Seat.builder().placement("Rico").build());
@@ -281,15 +281,15 @@ public class SeatControllerTest {
 	// Test du statut de .delete
 	@Test
 	public void test_Http_delete() {
-		
+
 		LOGGER.info("------------------ Testing Http status for .delete Method ------------------");
 
 		try {
 			LOGGER.info("------------------ Saving User ------------------");
 			seatServiceToMock.add(seat);
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
-			MvcResult mvcResult = mvc
-					.perform(MockMvcRequestBuilders.delete(uri + "/delete/" + seat.getId_seat())).andReturn();
+			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri + "/delete/" + seat.getId_seat()))
+					.andReturn();
 			LOGGER.info("------------------ Verifying HTTP Status ------------------");
 			assertEquals(200, mvcResult.getResponse().getStatus());
 
@@ -311,7 +311,6 @@ public class SeatControllerTest {
 
 	@Test
 	public void test_call_seatService_delete() {
-		
 
 		LOGGER.info("------------------ Testing call of UserService.delete Method ------------------");
 		seatController.delete(1);
