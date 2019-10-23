@@ -2,8 +2,7 @@ package com.inti.formation.repository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import java.time.LocalDate;
-import java.time.Month;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,27 +15,26 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.inti.formation.entity.Adress;
-import com.inti.formation.entity.User;
+import com.inti.formation.entity.SeatReservation;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
-public class UserRepositoryTest {
+public class SeatReservationRepositoryTest {
 
 	@Autowired
 	private TestEntityManager entityManager;
 
 	@Autowired
-	private IUserRepository userRepo;
-	private static final Logger LOGGER = LoggerFactory.getLogger(UserRepositoryTest.class);
-	private User dhia;
+	private ISeatReservationRepository resaRepo;
+	private static final Logger LOGGER = LoggerFactory.getLogger(SeatReservationRepositoryTest.class);
+	private SeatReservation dhia;
 	private int dhiaId;
 
 	@Before
 	public void setUp() {
 		// given
-		dhia = User.builder().name("Dhia").build();
+		dhia = SeatReservation.builder().starting_time("Dhia").build();
 		dhiaId = (int) entityManager.persistAndGetId(dhia);
 		LOGGER.info("____________ givenEntity saved ________________");
 	}
@@ -46,14 +44,13 @@ public class UserRepositoryTest {
 
 		LOGGER.info("____________Test givenEntityRepository .save Method________________");
 		LOGGER.info("____________ Set newGivenEntity ________________");
-		User user = User.builder().name("Vincent").adress(new Adress(27, "bd Eugène Deruelle", "Lyon", 69003, "France"))
-				.dateDeNaissance(LocalDate.of(1988, Month.MARCH, 22)).build();
+		SeatReservation resa = SeatReservation.builder().starting_time("Vincent").build();
 		// when
 		LOGGER.info("____________ Save givenEntity ________________");
-		userRepo.save(user);
+		resaRepo.save(resa);
 		// then
 		LOGGER.info("____________Test equal ________________");
-		assertEquals(user, userRepo.findById(user.getId_user()).get());
+		assertEquals(resa, resaRepo.findById(resa.getId_seat_reservation()).get());
 
 	}
 
@@ -62,10 +59,10 @@ public class UserRepositoryTest {
 		LOGGER.info("____________Test givenEntityRepository .delete Method ________________");
 		// when
 		LOGGER.info("____________ Delete givenEntity ________________");
-		userRepo.deleteById(dhia.getId_user());
+		resaRepo.deleteById(dhia.getId_seat_reservation());
 		// then
 		LOGGER.info("____________Test Null ________________");
-		assertFalse(userRepo.findById(dhiaId).isPresent());
+		assertFalse(resaRepo.findById(dhiaId).isPresent());
 
 	}
 
@@ -74,10 +71,10 @@ public class UserRepositoryTest {
 		LOGGER.info("____________Test givenEntityRepository .getOne Method________________");
 		// when
 		LOGGER.info("____________ Delete givenEntity________________");
-		userRepo.getOne(dhia.getId_user());
+		resaRepo.getOne(dhia.getId_seat_reservation());
 		// then
 		LOGGER.info("____________Test equal________________");
-		assertEquals("Dhia", userRepo.getOne(dhiaId).getName());
+		assertEquals("Dhia", resaRepo.getOne(dhiaId).getStarting_time());
 	}
 
 //	@Test
@@ -93,5 +90,4 @@ public class UserRepositoryTest {
 //		assertNotNull(users);
 //
 //	}
-
 }

@@ -26,7 +26,7 @@ public class LineController {
     private ILineService metier;
     
     @PostMapping(value="/add")
-    public Line ajouter(@RequestBody Line l) {
+    public Line add(@RequestBody Line l) {
     	return metier.add(l);
     }
     
@@ -40,7 +40,7 @@ public class LineController {
     	return metier.getById(id);
     }
     
-    @GetMapping(value="/Lines")
+    @GetMapping(value="/lines")
     public List<Line> findAll() {
     	return metier.findAll();
     }

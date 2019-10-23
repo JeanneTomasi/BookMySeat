@@ -26,7 +26,7 @@ public class SeatReservationController {
 	private ISeatReservationService metier;
 	
 	@PostMapping(value="/add")
-    public SeatReservation ajouter(@RequestBody SeatReservation sr) {
+    public SeatReservation add(@RequestBody SeatReservation sr) {
     	return metier.add(sr);
     }
     

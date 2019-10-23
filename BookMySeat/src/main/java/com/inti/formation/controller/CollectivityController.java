@@ -23,7 +23,7 @@ public class CollectivityController {
 	private ICollectivityService metier;
 	
     @PostMapping(value="/add")
-    public Collectivity ajouter(@RequestBody Collectivity c) {
+    public Collectivity add(@RequestBody Collectivity c) {
     	return metier.add(c);
     }
     

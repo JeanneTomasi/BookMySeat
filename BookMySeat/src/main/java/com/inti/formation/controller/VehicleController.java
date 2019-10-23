@@ -16,39 +16,37 @@ import org.springframework.web.bind.annotation.RestController;
 import com.inti.formation.entity.Vehicle;
 import com.inti.formation.iservice.IVehicleService;
 
-
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/apiVehicle")
 public class VehicleController {
-	
-    @Autowired
-    private IVehicleService metier;
-    
-    @PostMapping(value="/add")
-    public Vehicle ajouter(@RequestBody Vehicle v) {
-    	return metier.add(v);
-    }
-    
-    @PutMapping(value="/update")
-    public Vehicle update(@RequestBody Vehicle v) {
-    	return metier.update(v);
-    }
-    
-    @GetMapping(value="/get/{id}")
-    public Vehicle getById(@PathVariable int id) {
-    	return metier.getById(id);
-    }
-    
-    @GetMapping(value="/vehicles")
-    public List<Vehicle> findAll() {
-    	return metier.findAll();
-    }
-    
-    @DeleteMapping(value="/delete/{id}")
-    public void delete(@PathVariable int id) {
-    	metier.delete(id);
-    }
 
+	@Autowired
+	private IVehicleService metier;
+
+	@PostMapping(value = "/add")
+	public Vehicle add(@RequestBody Vehicle v) {
+		return metier.add(v);
+	}
+
+	@PutMapping(value = "/update")
+	public Vehicle update(@RequestBody Vehicle v) {
+		return metier.update(v);
+	}
+
+	@GetMapping(value = "/get/{id}")
+	public Vehicle getById(@PathVariable int id) {
+		return metier.getById(id);
+	}
+
+	@GetMapping(value = "/vehicles")
+	public List<Vehicle> findAll() {
+		return metier.findAll();
+	}
+
+	@DeleteMapping(value = "/delete/{id}")
+	public void delete(@PathVariable int id) {
+		metier.delete(id);
+	}
 
 }

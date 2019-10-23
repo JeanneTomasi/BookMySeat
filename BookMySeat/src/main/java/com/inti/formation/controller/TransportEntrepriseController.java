@@ -23,7 +23,7 @@ public class TransportEntrepriseController {
 	private ITransportEntrepriseService metier;
 	
 	@PostMapping(value="/add")
-    public TransportEntreprise ajouter(@RequestBody TransportEntreprise tre) {
+    public TransportEntreprise add(@RequestBody TransportEntreprise tre) {
     	return metier.add(tre);
     }
     
@@ -37,7 +37,7 @@ public class TransportEntrepriseController {
     	return metier.getById(id);
     }
     
-    @GetMapping(value="/transportEntreprises")
+	@GetMapping(value = "/transportEntreprises")
     public List<TransportEntreprise> findAll() {
     	return metier.findAll();
     }
