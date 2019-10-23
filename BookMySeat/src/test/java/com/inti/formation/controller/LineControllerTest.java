@@ -32,16 +32,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inti.formation.BookMySeatApplication;
-import com.inti.formation.entity.Adress;
-import com.inti.formation.entity.User;
-import com.inti.formation.repository.UserRepositoryTest;
-import com.inti.formation.service.UserService;
+import com.inti.formation.entity.Line;
+import com.inti.formation.repository.LineRepositoryTest;
+import com.inti.formation.service.LineService;
 
 @WebAppConfiguration
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BookMySeatApplication.class)
-public class UserControllerTest {
-
+public class LineControllerTest {
+	
 	@Autowired
 	WebApplicationContext webApplicationContext;
 
@@ -60,21 +59,19 @@ public class UserControllerTest {
 	}
 
 	@InjectMocks
-	private UserController userController;
+	private LineController lineController;
 
 	@Mock
-	private UserService userServiceToMock;
+	private LineService lineServiceToMock;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(UserRepositoryTest.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(LineRepositoryTest.class);
 
-	public UserControllerTest() {
+	public LineControllerTest() {
 		super();
-		this.uri = "/apiUser";
+		this.uri = "/apiLine";
 	}
 
-	private Adress adress = new Adress(1, "yolo", "youpi", 32000, "yipo");
-
-	private User user = User.builder().id_user(1).firstName("José").adress(adress).build();
+	private Line line = Line.builder().id_line(1).name("Paco").build();
 
 	/**
 	 * 
@@ -89,7 +86,7 @@ public class UserControllerTest {
 		LOGGER.info("------------------ Testing Http status for .add Method ------------------");
 		try {
 			LOGGER.info("------------------ Serializing User Object ------------------");
-			String inputJson = this.mapToJson(user);
+			String inputJson = this.mapToJson(line);
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
 			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri + "/add")
 					.contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
@@ -108,20 +105,20 @@ public class UserControllerTest {
 	public void test_return_addEntity() {
 		LOGGER.info("------------------ Testing return of .add Method ------------------");
 		LOGGER.info("------------------ Constructing Mockito reponse ------------------");
-		Mockito.when(userServiceToMock.add(user)).thenReturn(User.builder().firstName("Patate").build());
+		Mockito.when(lineServiceToMock.add(line)).thenReturn(Line.builder().name("Patate").build());
 		LOGGER.info("------------------- Test return of addEntity ----------------------");
-		assertEquals(User.builder().firstName("Patate").build(), userController.add(user));
+		assertEquals(Line.builder().name("Patate").build(), lineController.add(line));
 	}
 
 	// Test de l'appel de la méthode du service
 
 	@Test
-	public void test_call_userService_addEntity() {
+	public void test_call_lineService_addEntity() {
 		LOGGER.info("------------------ Testing the call of the good Service Method ------------------");
 		LOGGER.info("------------------ Saving User ------------------");
-		userController.add(user);
+		lineController.add(line);
 		LOGGER.info("------------------ Verifying add Method ------------------");
-		verify(userServiceToMock).add(user);
+		verify(lineServiceToMock).add(line);
 	}
 
 	/**
@@ -138,10 +135,10 @@ public class UserControllerTest {
 
 		try {
 			LOGGER.info("------------------ Serializing User Object ------------------");
-			userServiceToMock.add(user);
-			User newUser = user;
-			newUser.setFirstName("Rico");
-			String inputJson = this.mapToJson(newUser);
+			lineServiceToMock.add(line);
+			Line newLine = line;
+			newLine.setName("Rico");
+			String inputJson = this.mapToJson(newLine);
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
 			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(uri + "/update")
 					.contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
@@ -158,20 +155,20 @@ public class UserControllerTest {
 	public void test_return_updateEntity() {
 		LOGGER.info("------------------ Testing return of .update Method ------------------");
 		LOGGER.info("------------------ Constructing Mockito reponse ------------------");
-		Mockito.when(userServiceToMock.update(user)).thenReturn(User.builder().firstName("Patate").build());
+		Mockito.when(lineServiceToMock.update(line)).thenReturn(Line.builder().name("Patate").build());
 		LOGGER.info("------------------- Test return of updateEntity ----------------------");
-		assertEquals(User.builder().firstName("Patate").build(), userController.update(user));
+		assertEquals(Line.builder().name("Patate").build(), lineController.update(line));
 	}
 
 	// Test de l'appel de la méthode du service
 
 	@Test
-	public void test_call_userService_updateEntity() {
+	public void test_call_lineService_updateEntity() {
 		LOGGER.info("------------------ Testing call of UserService.update Method ------------------");
 		LOGGER.info("------------------ Saving User ------------------");
-		userController.update(user);
+		lineController.update(line);
 		LOGGER.info("------------------ Verifying update Method ------------------");
-		verify(userServiceToMock).update(user);
+		verify(lineServiceToMock).update(line);
 	}
 
 	/**
@@ -188,9 +185,9 @@ public class UserControllerTest {
 
 		try {
 			LOGGER.info("------------------ Saving User ------------------");
-			userServiceToMock.add(user);
+			lineServiceToMock.add(line);
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
-			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri + "/get/"+user.getId_user()).accept(MediaType.APPLICATION_JSON_VALUE))
+			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri + "/get/"+line.getId_line()).accept(MediaType.APPLICATION_JSON_VALUE))
 					.andReturn();
 			LOGGER.info("------------------ Verifying HTTP Status ------------------");
 			assertEquals(200, mvcResult.getResponse().getStatus());
@@ -205,20 +202,20 @@ public class UserControllerTest {
 	public void test_return_getById() {
 		LOGGER.info("------------------ Testing return of .getById Method ------------------");
 		LOGGER.info("------------------ Constructing Mockito reponse ------------------");
-		Mockito.when(userServiceToMock.getById(1)).thenReturn(user);
+		Mockito.when(lineServiceToMock.getById(1)).thenReturn(line);
 		LOGGER.info("------------------- Test return of getById ----------------------");
-		assertEquals(user, userController.getById(1));
+		assertEquals(line, lineController.getById(1));
 	}
 
 	// Test de l'appel de la méthode du service
 
 	@Test
-	public void test_call_userService_getById() {
+	public void test_call_lineService_getById() {
 		LOGGER.info("------------------ Testing call of UserService.getById Method ------------------");
 		LOGGER.info("------------------ Call method User ------------------");
-		userController.getById(1);
+		lineController.getById(1);
 		LOGGER.info("------------------ Verifying getById Method ------------------");
-		verify(userServiceToMock).getById(1);
+		verify(lineServiceToMock).getById(1);
 	}
 
 	/**
@@ -236,10 +233,10 @@ public class UserControllerTest {
 
 		try {
 			LOGGER.info("------------------ Saving User ------------------");
-			userServiceToMock.add(user);
+			lineServiceToMock.add(line);
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
 			MvcResult mvcResult = mvc
-					.perform(MockMvcRequestBuilders.get(uri + "/users").accept(MediaType.APPLICATION_JSON_VALUE))
+					.perform(MockMvcRequestBuilders.get(uri + "/lines").accept(MediaType.APPLICATION_JSON_VALUE))
 					.andReturn();
 			LOGGER.info("------------------ Verifying HTTP Status ------------------");
 			assertEquals(200, mvcResult.getResponse().getStatus());
@@ -255,24 +252,24 @@ public class UserControllerTest {
 	public void test_return_findAll_UserList() {
 		
 		LOGGER.info("------------------ Testing return of .findAll Method ------------------");
-		List<User> users = new ArrayList<User>();
-		users.add(User.builder().name("Rico").build());
-		users.add(User.builder().name("Poncho").build());
-		users.add(user);
+		List<Line> lines = new ArrayList<Line>();
+		lines.add(Line.builder().name("Rico").build());
+		lines.add(Line.builder().name("Poncho").build());
+		lines.add(line);
 		LOGGER.info("------------------ Constructing Mockito reponse ------------------");
-		Mockito.when(userServiceToMock.findAll()).thenReturn(users);
+		Mockito.when(lineServiceToMock.findAll()).thenReturn(lines);
 		LOGGER.info("------------------- Test return of findAll ----------------------");
-		assertEquals(users, userController.findAll());
+		assertEquals(lines, lineController.findAll());
 	}
 
 	// Test de l'appel de la méthode du service
 
 	@Test
-	public void test_call_userService_findAll() {
+	public void test_call_lineService_findAll() {
 		LOGGER.info("------------------ Testing call of UserService.findAll Method ------------------");
-		userController.findAll();
+		lineController.findAll();
 		LOGGER.info("------------------ Verifying findAll Method ------------------");
-		verify(userServiceToMock).findAll();
+		verify(lineServiceToMock).findAll();
 	}
 
 	/**
@@ -289,10 +286,10 @@ public class UserControllerTest {
 
 		try {
 			LOGGER.info("------------------ Saving User ------------------");
-			userServiceToMock.add(user);
+			lineServiceToMock.add(line);
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
 			MvcResult mvcResult = mvc
-					.perform(MockMvcRequestBuilders.delete(uri + "/delete/" + user.getId_user())).andReturn();
+					.perform(MockMvcRequestBuilders.delete(uri + "/delete/" + line.getId_line())).andReturn();
 			LOGGER.info("------------------ Verifying HTTP Status ------------------");
 			assertEquals(200, mvcResult.getResponse().getStatus());
 
@@ -307,19 +304,19 @@ public class UserControllerTest {
 //
 //		LOGGER.info("------------------ Testing return of .delete Method ------------------");
 //		LOGGER.info("------------------- Test return of findAll ----------------------");
-//		assertNull(userController.delete(1));
+//		assertNull(lineController.delete(1));
 //	}
 
 	// Test de l'appel de la méthode du service
 
 	@Test
-	public void test_call_userService_delete() {
+	public void test_call_lineService_delete() {
 		
 
 		LOGGER.info("------------------ Testing call of UserService.delete Method ------------------");
-		userController.delete(1);
+		lineController.delete(1);
 		LOGGER.info("------------------ Verifying delete Method ------------------");
-		verify(userServiceToMock).delete(1);
+		verify(lineServiceToMock).delete(1);
 	}
 
 	/**
@@ -350,5 +347,6 @@ public class UserControllerTest {
 		ObjectMapper objectMapper = new ObjectMapper();
 		return objectMapper.readValue(json, clazz);
 	}
+
 
 }

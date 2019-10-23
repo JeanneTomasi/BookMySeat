@@ -26,7 +26,7 @@ public class LineController {
     private ILineService metier;
     
     @PostMapping(value="/add")
-    public Line ajouter(@RequestBody Line l) {
+    public Line add(@RequestBody Line l) {
     	return metier.add(l);
     }
     

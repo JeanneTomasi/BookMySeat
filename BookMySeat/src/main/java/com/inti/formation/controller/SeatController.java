@@ -26,7 +26,7 @@ public class SeatController {
     private ISeatService metier;
     
     @PostMapping(value="/add")
-    public Seat ajouter(@RequestBody Seat s) {
+    public Seat add(@RequestBody Seat s) {
     	return metier.add(s);
     }
     
