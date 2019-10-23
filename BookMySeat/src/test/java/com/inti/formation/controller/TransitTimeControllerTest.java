@@ -105,7 +105,8 @@ public class TransitTimeControllerTest {
 	public void test_return_addEntity() {
 		LOGGER.info("------------------ Testing return of .add Method ------------------");
 		LOGGER.info("------------------ Constructing Mockito reponse ------------------");
-		Mockito.when(transitServiceToMock.add(transit)).thenReturn(TransitTime.builder().transit_time("Patate").build());
+		Mockito.when(transitServiceToMock.add(transit))
+				.thenReturn(TransitTime.builder().transit_time("Patate").build());
 		LOGGER.info("------------------- Test return of addEntity ----------------------");
 		assertEquals(TransitTime.builder().transit_time("Patate").build(), transitController.add(transit));
 	}
@@ -136,9 +137,9 @@ public class TransitTimeControllerTest {
 		try {
 			LOGGER.info("------------------ Serializing User Object ------------------");
 			transitServiceToMock.add(transit);
-			TransitTime newColl = transit;
-			newColl.setTransit_time("Rico");
-			String inputJson = this.mapToJson(newColl);
+			TransitTime newTransit = transit;
+			newTransit.setTransit_time("Rico");
+			String inputJson = this.mapToJson(newTransit);
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
 			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(uri + "/update")
 					.contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
@@ -155,7 +156,8 @@ public class TransitTimeControllerTest {
 	public void test_return_updateEntity() {
 		LOGGER.info("------------------ Testing return of .update Method ------------------");
 		LOGGER.info("------------------ Constructing Mockito reponse ------------------");
-		Mockito.when(transitServiceToMock.update(transit)).thenReturn(TransitTime.builder().transit_time("Patate").build());
+		Mockito.when(transitServiceToMock.update(transit))
+				.thenReturn(TransitTime.builder().transit_time("Patate").build());
 		LOGGER.info("------------------- Test return of updateEntity ----------------------");
 		assertEquals(TransitTime.builder().transit_time("Patate").build(), transitController.update(transit));
 	}
@@ -187,8 +189,8 @@ public class TransitTimeControllerTest {
 			LOGGER.info("------------------ Saving User ------------------");
 			transitServiceToMock.add(transit);
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
-			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri + "/get/"+transit.getId_transit_time()).accept(MediaType.APPLICATION_JSON_VALUE))
-					.andReturn();
+			MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri + "/get/" + transit.getId_transit_time())
+					.accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 			LOGGER.info("------------------ Verifying HTTP Status ------------------");
 			assertEquals(200, mvcResult.getResponse().getStatus());
 
@@ -250,7 +252,7 @@ public class TransitTimeControllerTest {
 
 	@Test
 	public void test_return_findAll_UserList() {
-		
+
 		LOGGER.info("------------------ Testing return of .findAll Method ------------------");
 		List<TransitTime> transits = new ArrayList<TransitTime>();
 		transits.add(TransitTime.builder().transit_time("Rico").build());
@@ -281,7 +283,7 @@ public class TransitTimeControllerTest {
 	// Test du statut de .delete
 	@Test
 	public void test_Http_delete() {
-		
+
 		LOGGER.info("------------------ Testing Http status for .delete Method ------------------");
 
 		try {
@@ -289,7 +291,8 @@ public class TransitTimeControllerTest {
 			transitServiceToMock.add(transit);
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
 			MvcResult mvcResult = mvc
-					.perform(MockMvcRequestBuilders.delete(uri + "/delete/" + transit.getId_transit_time())).andReturn();
+					.perform(MockMvcRequestBuilders.delete(uri + "/delete/" + transit.getId_transit_time()))
+					.andReturn();
 			LOGGER.info("------------------ Verifying HTTP Status ------------------");
 			assertEquals(200, mvcResult.getResponse().getStatus());
 
@@ -311,7 +314,6 @@ public class TransitTimeControllerTest {
 
 	@Test
 	public void test_call_transitService_delete() {
-		
 
 		LOGGER.info("------------------ Testing call of UserService.delete Method ------------------");
 		transitController.delete(1);

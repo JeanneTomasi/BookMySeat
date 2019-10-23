@@ -237,7 +237,7 @@ public class VehicleControllerTest {
 			vehicleServiceToMock.add(vehicle);
 			LOGGER.info("------------------ Mocking Context Webservice and invoking the webservice ------------------");
 			MvcResult mvcResult = mvc.perform(
-					MockMvcRequestBuilders.get(uri + "/vehicleectivities").accept(MediaType.APPLICATION_JSON_VALUE))
+					MockMvcRequestBuilders.get(uri + "/vehicles").accept(MediaType.APPLICATION_JSON_VALUE))
 					.andReturn();
 			LOGGER.info("------------------ Verifying HTTP Status ------------------");
 			assertEquals(200, mvcResult.getResponse().getStatus());
