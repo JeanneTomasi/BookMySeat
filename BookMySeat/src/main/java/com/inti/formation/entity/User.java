@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -39,8 +38,11 @@ public class User implements Serializable{
 	private String name;
 	private String firstName;
 	private LocalDate dateDeNaissance;
-	@Embedded
-	private Adress adress;
+	private int num;
+	private String street;
+	private String city;
+	private int postalCode;
+	private String country;
 	private String email;
 	@Enumerated(EnumType.STRING)
 	private Handicap handicap;
