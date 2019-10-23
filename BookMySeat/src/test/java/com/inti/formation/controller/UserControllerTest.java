@@ -32,7 +32,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inti.formation.BookMySeatApplication;
-import com.inti.formation.entity.Adress;
 import com.inti.formation.entity.User;
 import com.inti.formation.repository.UserRepositoryTest;
 import com.inti.formation.service.UserService;
@@ -72,9 +71,7 @@ public class UserControllerTest {
 		this.uri = "/apiUser";
 	}
 
-	private Adress adress = new Adress(1, "yolo", "youpi", 32000, "yipo");
-
-	private User user = User.builder().id_user(1).firstName("José").adress(adress).build();
+	private User user = User.builder().id_user(1).firstName("José").num(1).street("yolo").city("youpi").postalCode(32000).country("yipo").build();
 
 	/**
 	 * 
