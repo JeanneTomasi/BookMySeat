@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -33,8 +34,8 @@ public class Line implements Serializable {
 	private int id_line;
 	private String name;
 	private String localisation;
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@OneToMany(mappedBy = "line")
+	@JsonIgnore
 	private List<Vehicle> vehicle;
 	
 }

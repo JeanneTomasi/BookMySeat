@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -42,7 +43,7 @@ public class Vehicle implements Serializable {
 	//Taux de remplissage du véhicule, calculé à partir de capacity et passengers
 	private double fullRate;
 	@OneToMany(mappedBy = "vehicle")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnore
 	private List<Seat> seat;
 	@ManyToOne
 	@JoinColumn(name = "id_line")

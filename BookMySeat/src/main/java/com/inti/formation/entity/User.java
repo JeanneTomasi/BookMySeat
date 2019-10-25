@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -47,8 +48,8 @@ public class User implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private Handicap handicap;
 	private String username;
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	private List<SeatReservation> seat_reservation;
 
 }

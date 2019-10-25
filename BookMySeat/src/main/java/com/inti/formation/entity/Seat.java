@@ -39,7 +39,7 @@ public class Seat implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_vehicle")
 	private Vehicle vehicle;
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@OneToMany(mappedBy = "seat")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<SeatReservation> seat_reservation;
 }

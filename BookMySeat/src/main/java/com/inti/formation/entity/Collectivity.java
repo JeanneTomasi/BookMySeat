@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -32,8 +33,8 @@ public class Collectivity implements Serializable{
 	private String name;
 //	zone sur laquelle la collectivité officie
 	private String operation_area;
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@OneToOne(mappedBy = "collectivity")
+	@JsonIgnore
 	private TransportEntreprise transport_entreprise;
 
 }
