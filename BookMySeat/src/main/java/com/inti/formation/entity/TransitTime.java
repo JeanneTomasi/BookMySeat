@@ -31,8 +31,10 @@ public class TransitTime implements Serializable{
 	@GeneratedValue
 	private int id_transit_time;
 	private String transit_time;
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@OneToMany(mappedBy = "transit_time")
 	private List<Vehicle> vehicle;
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@OneToMany(mappedBy = "transit_time")
 	private List<Station> station;
 	

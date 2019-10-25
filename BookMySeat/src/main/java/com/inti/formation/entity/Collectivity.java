@@ -32,6 +32,7 @@ public class Collectivity implements Serializable{
 	private String name;
 //	zone sur laquelle la collectivité officie
 	private String operation_area;
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@OneToOne(mappedBy = "collectivity")
 	private TransportEntreprise transport_entreprise;
 

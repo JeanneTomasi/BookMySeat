@@ -47,8 +47,7 @@ public class User implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private Handicap handicap;
 	private String username;
-	@OneToOne(mappedBy = "user")
-	private Seat seat;
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@OneToMany(mappedBy = "user")
 	private List<SeatReservation> seat_reservation;
 

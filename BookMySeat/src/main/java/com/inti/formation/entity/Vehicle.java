@@ -22,7 +22,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Vehicle implements Serializable {
 
 	/**
@@ -43,6 +42,7 @@ public class Vehicle implements Serializable {
 	//Taux de remplissage du véhicule, calculé à partir de capacity et passengers
 	private double fullRate;
 	@OneToMany(mappedBy = "vehicle")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Seat> seat;
 	@ManyToOne
 	@JoinColumn(name = "id_line")

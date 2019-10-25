@@ -36,12 +36,10 @@ public class Seat implements Serializable {
 	private String placement;
 	private boolean reservable;
 	private boolean isReserved;
-	@OneToOne
-	@JoinColumn(name = "id_user")
-	private User user;
 	@ManyToOne
 	@JoinColumn(name = "id_vehicle")
 	private Vehicle vehicle;
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@OneToMany(mappedBy = "seat")
 	private List<SeatReservation> seat_reservation;
 }

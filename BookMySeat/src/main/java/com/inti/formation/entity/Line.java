@@ -33,6 +33,7 @@ public class Line implements Serializable {
 	private int id_line;
 	private String name;
 	private String localisation;
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@OneToMany(mappedBy = "line")
 	private List<Vehicle> vehicle;
 	
