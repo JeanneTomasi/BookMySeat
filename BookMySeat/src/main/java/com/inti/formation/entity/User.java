@@ -46,7 +46,7 @@ public class User implements Serializable{
 	private String country;
 	private String email;
 	@Enumerated(EnumType.STRING)
-	private Handicap handicap;
+	private Handicap handicap = Handicap.Valid;
 	private String username;
 	@OneToMany(mappedBy = "user")
 	@JsonIgnore
